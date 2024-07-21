@@ -85,9 +85,18 @@
               }
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "public/plugins/fontawesome-free/css/all.min.css",
+              "public/dist/css/adminlte.min.css",
+              "public/plugins/bootstrap/css/bootstrap.min.css"
+
             ],
-            "scripts": []
+          
+            "scripts": [
+              "public/plugins/jquery/jquery.min.js",
+              "public/plugins/bootstrap/js/bootstrap.bundle.min.js",
+              "public/dist/js/adminlte.min.js"
+            ]
           }
         }
       }
