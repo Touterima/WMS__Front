@@ -88,6 +88,30 @@
                   <td>{{ produit.prixAchat }}</td>
                   <td>{{ produit.prixVente }}</td>
                   <td>{{ produit.prixTtc }}</td>
+                  
+                  <td>
+                    <button
+                      [routerLink]="['/update', produit.id]"
+                      cButton
+                      class="me-1"
+                      color="success"
+                      type="submit"
+                      value="Edit"
+                    >
+                      Modifier
+                    </button>
+                    <button
+                    (click)="deleteProduit(produit.id)"
+                      cButton
+                      class="me-1"
+                      color="danger"
+                      type="submit"
+                      value="Delete"
+                    >
+                      Supprimer
+                    </button>
+                  </td>
+
                 </tr>
               }
               </tbody>

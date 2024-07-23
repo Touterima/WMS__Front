@@ -22,7 +22,7 @@ export class ProductService {
   }
 
   createProduit(produit: Produits): Observable<Produits> {
-    return this.http.post<Produits>(`${this.baseUrl}/add`, produit);
+    return this.http.post<Produits>(`${this.baseUrl}/add-product`, produit);
   }
 
   updateProduit(id: number, produit: Produits): Observable<Produits> {
