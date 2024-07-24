@@ -5,6 +5,8 @@ import { AdminComponent } from './components/admin/admin.component';
 import { AddProductComponent } from './components/products/add/add-product.component';
 import { ProductListComponent } from './components/products/list/list-products.component';
 import { RegisterComponent } from './components/auth/register/register.component';
+import { EditComponent } from './components/products/edit/edit.component';
+import { TransactionListComponent } from './components/Transactions/transaction-list.component';
 
 export const routes: Routes = [
     { path:'', component: LoginComponent},
@@ -15,7 +17,11 @@ export const routes: Routes = [
             { path:'', component: DashboardComponent},
             { path:'dashboard', component: DashboardComponent},
             { path:'add-product', component: AddProductComponent},
-            { path:'product-list', component: ProductListComponent}
+            { path:'product-list', component: ProductListComponent},
+            { path:'editProduct/:id', component: EditComponent},
+            { path:'transaction-list', component: TransactionListComponent}
+            
+            
 
         ]
     }

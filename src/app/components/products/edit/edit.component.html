@@ -1,128 +1,129 @@
-<!-- Content Header (Page header) -->
+ 
+ 
+  <!-- Content Header (Page header) -->
 <section class="content-header">
-    <div class="container-fluid">
-      <div class="row mb-2">
-        <div class="col-sm-6">
-          <h1>Modifier le produit</h1>
-        </div>
-        <div class="col-sm-6">
-          <ol class="breadcrumb float-sm-right">
-            <li class="breadcrumb-item"><a href="#">Home</a></li>
-            <li class="breadcrumb-item active">Modifier le produit</li>
-          </ol>
-        </div>
+  <div class="container-fluid">
+    <div class="row mb-2">
+      <div class="col-sm-6">
+        <h1>Modifier le produit</h1>
       </div>
-    </div><!-- /.container-fluid -->
-  </section>
-  
-  <!-- Main content -->
-  <section class="content">
-    <div class="container-fluid">
-      <div class="card card-primary">
-        <div class="card-header">
-          <h3 class="card-title">Produit</h3>
-        </div>
-        <form (ngSubmit)="onSubmit()">
-          <div class="card-body">
-            
-            <!---->
-            
-        
-            <div class="row">
-              <div class="col-3">
-                <label>Reference</label>
-                <input type="text" id="refArt" [(ngModel)]="newProduct.refArt" name="refArt" class="form-control" placeholder="refArt" required>
-                <!--<input type="text" id="refArt" class="form-control" name="refArt" [(ngModel)]="produit.refArt" required>    -->
-              </div>
-              <div class="col-4">
-                <label>Designation</label>
-                <input type="text" id="designation" [(ngModel)]="newProduct.designation" class="form-control" placeholder="designation" name="designation" required>
-              </div>
-              <div class="col-4">
-                <label>Collection</label>
-                <input type="text" id="collection" [(ngModel)]="newProduct.collection" class="form-control" placeholder="collection" name="collection" required>
-              </div>
-              <div class="col-3">
-                <label>Famille</label>
-                <input type="text" id="famille" [(ngModel)]="newProduct.famille" class="form-control" placeholder="famille" name="famille" required>
-              </div>
-            </div>
-  
-            <div class="row">
-              <br>
-              <br>
-            </div>
-  
-            <div class="row">
-              <div class="col-3">
-                <label>Ref Fournisseur</label>
-                <input type="text" id="refFourn" [(ngModel)]="newProduct.refFourn" class="form-control" placeholder="refFourn" name="refFourn" required>
-              </div>
-              <div class="col-4">
-                <label>Fournisseur</label>
-                <input type="text" id="fournisseur" [(ngModel)]="newProduct.fournisseur" class="form-control" placeholder="fournisseur" name="fournisseur" required>
-              </div>
-              
-            </div>
-            <div class="row">
-              <br>
-              <br>
-            </div>
-  
-            <div class="row">
-              <div class="col-3">
-                <label>Quantité</label>
-                <input type="number" id="qte" [(ngModel)]="newProduct.qte" class="form-control" placeholder="quantité" name="qte" required>
-              </div>
-              <div class="col-4">
-                <label>Unite</label>
-                <input type="text" id="unite" [(ngModel)]="newProduct.unite" class="form-control" placeholder="unite" name="unite" required>
-              </div>
-              
-            </div>
-            <div class="row">
-              <br>
-              <br>
-            </div>
-            
-            <div class="row">
-              <div class="col-3">
-                <label>TVA</label>
-                <input type="number" id="tva" [(ngModel)]="newProduct.tva" class="form-control" placeholder="tva" name="tva" required>
-              </div>
-              <div class="col-3">
-                <label>Prix d'chat</label>
-                <input type="number" id="prixAchat" [(ngModel)]="newProduct.prixAchat" class="form-control" placeholder="prixAchat" name="prixAchat" required>
-              </div>
-              <div class="col-3">
-                <label>Prix de vente</label>
-                <input type="number" id="prixVente" [(ngModel)]="newProduct.prixVente" class="form-control" placeholder="prixVente" name="prixVente" required>
-              </div>
-              <div class="col-3">
-                <label>Prix TTC</label>
-                <input type="number" id="prixTtc" [(ngModel)]="newProduct.prixTtc" class="form-control" placeholder="prixTtc" name="prixTtc" required>
-              </div>
-            </div>
-  
-            
+      <div class="col-sm-6">
+        <ol class="breadcrumb float-sm-right">
+          <li class="breadcrumb-item"><a href="#">Home</a></li>
+          <li class="breadcrumb-item active">Modifier le produit</li>
+        </ol>
+      </div>
+    </div>
+  </div><!-- /.container-fluid -->
+</section>
+
+<!-- Main content -->
+<section class="content">
+  <div class="container-fluid">
+    <div class="card card-primary">
+      <div class="card-header">
+        <h3 class="card-title">Produit</h3>
+      </div>
+      <form (ngSubmit)="onSubmit()" *ngIf="produit.id">
+        <div class="card-body">
           
-          </div>
-          <!-- /.card-body -->
-          <div class="card-footer">
-            <button type="submit" class="btn btn-primary">Ajouter le produit</button>
-          </div>
-        </form>
-        @if (message) {
-          <p [class]="messageClass">{{ message }}</p>
-        }
-        
-      </div>
-      <!-- /.card -->
-  
-  
+          <!---->
+          
       
-    </div><!-- /.container-fluid -->
-  </section>
-  <!-- /.content -->
-  
-  
+          <div class="row">
+            <div class="col-3">
+              <label>Reference</label>
+              <input type="text" id="refArt" [(ngModel)]="produit.refArt"  name="refArt" class="form-control" placeholder="refArt" required>
+              <!--<input type="text" id="refArt" class="form-control" name="refArt" [(ngModel)]="produit.refArt" required>    -->
+            </div>
+            <div class="col-4">
+              <label>Designation</label>
+              <input type="text" id="designation" [(ngModel)]="produit.designation"  class="form-control" placeholder="designation" name="designation" required>
+            </div>
+            <div class="col-4">
+              <label>Collection</label>
+              <input type="text" id="collection" [(ngModel)]="produit.collection"  class="form-control" placeholder="collection" name="collection" required>
+            </div>
+            <div class="col-3">
+              <label>Famille</label>
+              <input type="text" id="famille" [(ngModel)]="produit.famille" class="form-control" placeholder="famille" name="famille" required>
+            </div>
+          </div>
+
+          <div class="row">
+            <br>
+            <br>
+          </div>
+
+          <div class="row">
+            <div class="col-3">
+              <label>Ref Fournisseur</label>
+              <input type="text" id="refFourn" [(ngModel)]="produit.refFourn" class="form-control" placeholder="refFourn" name="refFourn" required>
+            </div>
+            <div class="col-4">
+              <label>Fournisseur</label>
+              <input type="text" id="fournisseur" [(ngModel)]="produit.fournisseur" class="form-control" placeholder="fournisseur" name="fournisseur" required>
+            </div>
+            
+          </div>
+          <div class="row">
+            <br>
+            <br>
+          </div>
+
+          <div class="row">
+            <div class="col-3">
+              <label>Quantité</label>
+              <input type="number" id="qte" [(ngModel)]="produit.qte" class="form-control" placeholder="quantité" name="qte" required>
+            </div>
+            <div class="col-4">
+              <label>Unite</label>
+              <input type="text" id="unite" [(ngModel)]="produit.unite" class="form-control" placeholder="unite" name="unite" required>
+            </div>
+            
+          </div>
+          <div class="row">
+            <br>
+            <br>
+          </div>
+          
+          <div class="row">
+            <div class="col-3">
+              <label>TVA</label>
+              <input type="number" id="tva" [(ngModel)]="produit.tva" class="form-control" placeholder="tva" name="tva" required>
+            </div>
+            <div class="col-3">
+              <label>Prix d'chat</label>
+              <input type="number" id="prixAchat" [(ngModel)]="produit.prixAchat" class="form-control" placeholder="prixAchat" name="prixAchat" required>
+            </div>
+            <div class="col-3">
+              <label>Prix de vente</label>
+              <input type="number" id="prixVente" [(ngModel)]="produit.prixVente" class="form-control" placeholder="prixVente" name="prixVente" required>
+            </div>
+            <div class="col-3">
+              <label>Prix TTC</label>
+              <input type="number" id="prixTtc" [(ngModel)]="produit.prixTtc" class="form-control" placeholder="prixTtc" name="prixTtc" required>
+            </div>
+          </div>
+
+          
+        
+        </div>
+        <!-- /.card-body -->
+        <div class="card-footer">
+          <button type="submit" class="btn btn-primary">Modifier le produit</button>
+          <button type="button" class="btn btn-secondary ms-2" [routerLink]="['/admin/product-list']">Annuler</button>
+
+        </div>
+      </form>
+      
+      
+    </div>
+    <!-- /.card -->
+
+
+
+    
+  </div><!-- /.container-fluid -->
+</section>
+<!-- /.content -->
