@@ -6,7 +6,8 @@ import { AddProductComponent } from './components/products/add/add-product.compo
 import { ProductListComponent } from './components/products/list/list-products.component';
 import { RegisterComponent } from './components/auth/register/register.component';
 import { EditComponent } from './components/products/edit/edit.component';
-import { TransactionListComponent } from './components/Transactions/transaction-list.component';
+import { SearchProductComponent } from './components/Transactions/search/searchProduc.component';
+import { TransactionListComponent } from './components/Transactions/list/list-transaction.component';
 
 export const routes: Routes = [
     { path:'', component: LoginComponent},
@@ -19,7 +20,9 @@ export const routes: Routes = [
             { path:'add-product', component: AddProductComponent},
             { path:'product-list', component: ProductListComponent},
             { path:'editProduct/:id', component: EditComponent},
+            { path:'add-transaction', component: SearchProductComponent},
             { path:'transaction-list', component: TransactionListComponent}
+            
             
             
 
