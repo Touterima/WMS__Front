@@ -12,12 +12,14 @@ import { FormsModule } from '@angular/forms';
 @Component({
   standalone: true,
   templateUrl: './searchProduct.component.html',
-  imports:[RouterModule, FormsModule]
+  imports:[RouterModule, FormsModule, CommonModule]
 })
 export class SearchProductComponent implements OnInit {
     produits: Produits[] = [];
     quantities: { [key: number]: number } = {};
    // quantities: Map<number, number> = new Map();
+   filteredProduits: Produits[] = [];
+   searchTerm: string = '';
   constructor(private productService: ProductService, private transactionService: TransactionService) { }
 
 
@@ -29,6 +31,7 @@ export class SearchProductComponent implements OnInit {
   loadProduits(): void {
     this.productService.getProduits().subscribe(data => {
       this.produits = data;
+      this.filteredProduits = data;//
 
       this.produits.forEach(produit => {
         if (produit.id !== undefined) {
@@ -38,6 +41,39 @@ export class SearchProductComponent implements OnInit {
     });
   }
 
+  onSearch(): void {
+    if (!this.searchTerm) {
+      this.filteredProduits = this.produits;
+      return;
+    }
+    
+
+    this.filteredProduits = this.produits.filter(produit =>
+      produit.id?.toString().toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      produit.refArt.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      produit.designation.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      produit.collection.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      produit.famille.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      produit.prixVente.toString().toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      produit.prixTtc.toString().toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+
+  /**** */
+  searchProduits(): void {
+    this.filteredProduits = this.produits.filter(produit =>
+      produit.refArt?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      produit.designation?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      produit.collection?.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      produit.famille?.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
+  }
+
+  onSearchButtonClick(): void {
+    this.searchProduits();
+  }
+  
 /*
   loadProduits() {
     this.productService.getProduits().subscribe(
