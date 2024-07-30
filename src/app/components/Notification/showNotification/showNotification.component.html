@@ -1,0 +1,24 @@
+<main>
+    <div class="container mt-5">
+      <div class="notification-details">
+        <div class="card shadow">
+          <div class="card-header bg-primary text-white">
+            <h2 class="card-title mb-0" style="color: #ffffff;">Notification Details</h2>
+          </div>
+          <div class="card-body">
+            <div class="notification-item">
+              <div class="notification-content">
+                <h4 class="notification-type">{{ notification.type }}</h4>
+                <hr class="my-4">
+                <p class="notification-date">Received on: {{ notification.date | date:'long' }}</p>
+                <p class="notification-content">{{ notification.content }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="card-footer text-muted text-center">
+            <a routerLink="/notifications" class="btn btn-primary">Back to Notifications</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>

@@ -1,0 +1,110 @@
+ <!-- Content Header (Page header) -->
+ <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>Utilisateurs</h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Utilisateurs</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h3 class="card-title">Liste des utilisateurs</h3>
+
+              <div class="card-tools">
+                <div class="input-group input-group-sm" style="width: 150px;">
+                  <input type="text" name="table_search" class="form-control float-right" placeholder="Search" >
+
+                  <div class="input-group-append">
+                    <button type="submit" class="btn btn-default" >
+                      <i class="fas fa-search"></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                      <tr>
+                        <th>Email</th>
+                        <th>Code</th>
+                        <th>Société</th>
+                        <th>Adresse</th>
+                        <th>MF</th>
+                        <th>Téléphone</th>
+                        <th>Fax</th>
+                        <th>Mobile</th>
+                        <th>Secteur</th>
+                        <th>Ville</th>
+                        <th>Classe Comptable</th>
+                        <th>Devise</th>
+                        <th>Rôle</th>
+                        <th>Statut</th>
+
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr></tr>
+                      @for (user of users; track user.id) {
+                        <tr>
+                          
+                          <td>{{ user.email }}</td>
+                          <td>{{ user.code }}</td>
+                          <td>{{ user.societe }}</td>
+                          <td>{{ user.adresse }}</td>
+                          <td>{{ user.mf }}</td>
+                          <td>{{ user.tel }}</td>
+                          <td>{{ user.fax }}</td>
+                          <td>{{ user.mob }}</td>
+                          <td>{{ user.secteur }}</td>
+                          <td>{{ user.ville }}</td>
+                          <td>{{ user.classeCompt }}</td>
+                          <td>{{ user.devise }}</td>
+                          <td>
+                            <span *ngIf="user.role[0]?.type === 'ADMIN'" class="badge badge-primary custom-badge">Admin</span>
+                            <span *ngIf="user.role[0]?.type === 'USER'" class="badge badge-secondary custom-badge">User</span>
+                            <span *ngIf="user.role[0]?.type !== 'ADMIN' && user.role[0]?.type !== 'USER'" class="badge badge-secondary custom-badge" style="background-color: #FFC107">Investor</span>
+                          </td>
+                          <td>{{ user.status }}</td>
+                          <td class="project-actions text-right" style="white-space: nowrap;">
+                            <a  class="btn btn-sm btn-primary mr-1"><i class="fas fa-eye"></i> View</a>
+                            <a href="#" class="btn btn-sm btn-warning mr-1"><i class="fas fa-edit"></i> Edit</a>
+                            <a (click)="deleteUser(user.id)" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
+                          </td>
+
+                        </tr>
+                      } @empty {
+                        <tr>
+                          <td colspan="15">Aucun utilisateur trouvé</td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+            </div>
+            <!-- /.card-body -->
+          </div>
+          <!-- /.card -->
+        </div>
+      </div>
+      <!-- /.row -->
+      
+   
+    </div><!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
