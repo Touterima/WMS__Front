@@ -9,6 +9,7 @@ import { EditComponent } from './components/products/edit/edit.component';
 import { SearchProductComponent } from './components/Transactions/search/searchProduc.component';
 import { TransactionListComponent } from './components/Transactions/list/list-transaction.component';
 import { UserListComponent } from './components/user/list/user-list.component';
+import { PasserTransactionsComponent } from './components/Transactions/passer-transactions/passer-transaction.component';
 
 export const routes: Routes = [
     { path:'', component: LoginComponent},
@@ -23,11 +24,9 @@ export const routes: Routes = [
             { path:'editProduct/:id', component: EditComponent},
             { path:'add-transaction', component: SearchProductComponent},
             { path:'transaction-list', component: TransactionListComponent},
-            { path:'users', component: UserListComponent}
-            
-            
-            
-            
+            { path:'users', component: UserListComponent},
+            { path:'passer-transaction', component: PasserTransactionsComponent}
+       
 
         ]
     }
