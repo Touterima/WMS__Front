@@ -5,12 +5,13 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { TransactionService } from '../../../services/transaction-service.service';
 import { Transaction } from '../../../models/transaction.models';
+import { FixedDecimalPipe } from '../../../fixed-decimal.pipe';
 
 
 @Component({
   standalone: true,
   templateUrl: './list-transaction.component.html',
-  imports:[CommonModule, RouterModule]
+  imports:[CommonModule, RouterModule, FixedDecimalPipe] 
 })
 export class TransactionListComponent implements OnInit {
  

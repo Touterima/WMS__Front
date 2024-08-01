@@ -57,7 +57,7 @@
                             <td>{{ transaction.id }}</td>
                             <td>{{ transaction.produits.refArt }}</td>
                             <td>{{ transaction.quantity }}</td>
-                            <td>{{ transaction.montant }}</td>
+                            <td>{{ transaction.montant | fixedDecimal }}</td>
                             <td>{{ transaction.details }}</td>
                             <td class="project-actions text-right">
                 
