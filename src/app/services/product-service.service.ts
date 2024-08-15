@@ -32,4 +32,10 @@ export class ProductService {
   deleteProduit(id: number): Observable<void> {
     return this.http.delete<void>(`${this.baseUrl}/delete/${id}`);
   }
+
+
+
+  updateProductStock(productId: number, newQuantity: number): Observable<Produits> {
+    return this.http.patch<Produits>(`${this.baseUrl}/produits/${productId}/stock`, { qte: newQuantity });
+  }
 }

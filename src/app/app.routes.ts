@@ -11,6 +11,7 @@ import { TransactionListComponent } from './components/Transactions/list/list-tr
 import { UserListComponent } from './components/user/list/user-list.component';
 import { PasserTransactionsComponent } from './components/Transactions/passer-transactions/passer-transaction.component';
 import { FactureComponent } from './components/facture/facture.component';
+import { TransfertStockComponent } from './components/transferStock/transfertStock.component';
 
 export const routes: Routes = [
     { path:'', component: LoginComponent},
@@ -27,7 +28,8 @@ export const routes: Routes = [
             { path:'transaction-list', component: TransactionListComponent},
             { path:'users', component: UserListComponent},
             { path:'passer-transaction', component: PasserTransactionsComponent},
-            { path:'facture', component: FactureComponent}
+            { path:'facture', component: FactureComponent},
+            { path:'transertStock', component: TransfertStockComponent}
        
 
         ]

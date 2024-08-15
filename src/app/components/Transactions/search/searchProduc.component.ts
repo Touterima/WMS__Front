@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
@@ -7,6 +7,8 @@ import { ProductService } from '../../../services/product-service.service';
 import { TransactionService } from '../../../services/transaction-service.service';
 import { Transaction } from '../../../models/transaction.models';
 import { FormsModule } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
+
 
 
 @Component({
@@ -20,7 +22,11 @@ export class SearchProductComponent implements OnInit {
    // quantities: Map<number, number> = new Map();
    filteredProduits: Produits[] = [];
    searchTerm: string = '';
-  constructor(private productService: ProductService, private transactionService: TransactionService) { }
+
+   //private _success = new Subject<string>();
+   //@ViewChild('selfClosingAlert',{static: false}) selfClosingAlert: NgbAlert;
+   //successMessage='';
+  constructor(private productService: ProductService, private transactionService: TransactionService,private toastr: ToastrService) { }
 
 
 
@@ -121,7 +127,7 @@ export class SearchProductComponent implements OnInit {
       );
     }
   }
- */
+ *//* 
   createTransaction(produit: Produits) {
     if (produit.id !== undefined && this.quantities[produit.id] !== undefined) {
       const quantity = this.quantities[produit.id] || 1;
@@ -140,6 +146,63 @@ export class SearchProductComponent implements OnInit {
       (error) => console.error('Erreur lors de la création de la transaction', error)
     );
   }
+}
+*/
+createTransaction(produit: Produits) {
+  if (produit.id !== undefined && this.quantities[produit.id] !== undefined) {
+    const quantity = this.quantities[produit.id] || 1;
+    
+    // Vérifier si la quantité demandée est disponible
+    if (quantity > produit.qte) {
+      console.error(`Quantité insuffisante. Disponible : ${produit.qte}, Demandé : ${quantity}`);
+      //this.toastr.error(`Quantité insuffisante. Disponible : ${produit.qte}, Demandé : ${quantity}`);
+      this.toastr.info(`Quantité insuffisante. Disponible : ${produit.qte}, Demandé : ${quantity}`);
+      // Vous pouvez également afficher un message à l'utilisateur ici
+      this.showErrorMessage(`Quantité insuffisante pour ${produit.designation}. Disponible : ${produit.qte}`);
+      return;
+    }
+
+    const transaction: Transaction = {
+      id: 0, // L'ID sera généré par le backend
+      produits: produit,
+      quantity: quantity,
+      montant: produit.prixVente * quantity,
+      details: `Transaction pour ${quantity} ${produit.designation}`
+    };
+
+    this.transactionService.createTransaction(transaction).subscribe(
+      (createdTransaction) => {
+        console.log('Transaction créée', createdTransaction);
+        this.toastr.success('Transaction créée avec succés');
+
+        // Mettre à jour la quantité en stock du produit
+        //this.updateProductStock(produit.id, (produit.qte - quantity));
+      },
+      (error) => {
+        console.error('Erreur lors de la création de la transaction', error);
+        this.showErrorMessage('Erreur lors de la création de la transaction');
+      }
+    );
+  }
+}
+
+// Méthode pour mettre à jour le stock du produit
+/*private updateProductStock(productId: number, newQuantity: number) {
+  this.productService.updateProductStock(productId, newQuantity).subscribe(
+    (updatedProduct) => {
+      console.log('Stock du produit mis à jour', updatedProduct);
+    },
+    (error) => {
+      console.error('Erreur lors de la mise à jour du stock', error);
+      this.showErrorMessage('Erreur lors de la mise à jour du stock');
+    }
+  );
+}*/
+private showErrorMessage(message: string) {
+  // Implémentez cette méthode selon votre système d'affichage de messages
+  // Par exemple, vous pourriez utiliser un service de notification ou un composant de message
+  // this.notificationService.showError(message);
+  console.error(message); // Pour l'instant, nous affichons juste dans la console
 }
   
 }

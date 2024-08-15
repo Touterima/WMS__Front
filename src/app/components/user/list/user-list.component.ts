@@ -4,10 +4,12 @@ import {Router} from "@angular/router";
 import {forkJoin} from "rxjs";
 import { UserService } from '../../../services/user-service.service';
 import { User } from '../../../models/user.models';
+import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-user-list',
-  templateUrl: './user-list.component.html'
+  standalone: true,
+  templateUrl: './user-list.component.html',
+  imports:[CommonModule]
 })
 export class UserListComponent implements OnInit{
     users: User[] = [];

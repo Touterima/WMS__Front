@@ -7,7 +7,7 @@ import { User } from '../models/user.models';
   providedIn: 'root'
 })
 export class UserService {
-  private baseUrl: String = 'http://localhost:8080/user/'
+  private baseUrl: String = 'http://localhost:8080/admin'
   constructor(private http: HttpClient) {}
   getAllUsers(): Observable<User[]> {
     return this.http.get<User[]>(`${this.baseUrl}/users`);
@@ -31,5 +31,8 @@ export class UserService {
   // Modifier un utilisateur
   updateUser(user: User): Observable<User> {
     return this.http.put<User>(`${this.baseUrl}/update-user/${user.id}`, user);
+  }
+  getUserByEmail(receiverEmail: string): Observable<User> {
+    return this.http.get<User>(`${this.baseUrl}/user/${receiverEmail}`);
   }
 }

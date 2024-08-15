@@ -78,9 +78,43 @@
                     </tbody>
                   </table>
             </div>
-            <a [routerLink]="['/admin/passer-transaction']" class="nav-link btn btn-success">
-              Passer les transactions</a>
+ <!--         <a [routerLink]="['/admin/passer-transaction']" class="nav-link btn btn-success">
+              Passer les transactions</a> -->  
+
             <!-- /.card-body -->
+            <button (click)="onValidateTransactions()" class="nav-link btn btn-success">Valider les transactions</button>
+
+            <!--*****          <div *ngIf="showReceiverForm">
+              <h3>Informations du destinataire</h3>
+              <form (ngSubmit)="onSubmitReceiver()">
+                
+                <div>
+                  <label for="email">Email:</label>
+                  <input id="email" type="email" [(ngModel)]="receiver.email" name="email" required>
+                </div>
+                
+                <button type="submit">Envoyer</button>
+              </form>
+            </div>              
+            --> 
+            
+            <!--********************************-->
+            <div class="card-body" *ngIf="showReceiverForm">
+              <h3>Informations du destinataire</h3>
+              <form (ngSubmit)="onSubmitReceiver()">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label for="exampleInputEmail1">Email du Récepteur</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" placeholder="Enter receiver email" [(ngModel)]="receiver.email" name="email" required>
+                  </div>
+      
+                  <a  class="nav-link btn btn-success" type="submit">Envoyer</a>
+                </div>
+              </form>
+            </div>
+            <div *ngIf="errorMessage" class="alert alert-danger">{{ errorMessage }}</div>
+          
+          
           </div>
           <!-- /.card -->
         </div>
@@ -91,3 +125,4 @@
     </div><!-- /.container-fluid -->
   </section>
   <!-- /.content -->
+
