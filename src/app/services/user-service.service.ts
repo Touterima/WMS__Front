@@ -32,7 +32,7 @@ export class UserService {
   updateUser(user: User): Observable<User> {
     return this.http.put<User>(`${this.baseUrl}/update-user/${user.id}`, user);
   }
-  getUserByEmail(receiverEmail: string): Observable<User> {
-    return this.http.get<User>(`${this.baseUrl}/user/${receiverEmail}`);
+  getUserByEmail(email: string): Observable<any> {
+    return this.http.get(`${this.baseUrl}/search?email=${email}`);
   }
 }

@@ -27,9 +27,9 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css",
               "node_modules/ngx-toastr/toastr.css"
-        
             ],
             "scripts": []
           },
@@ -87,11 +87,11 @@
               }
             ],
             "styles": [
+              "@angular/material/prebuilt-themes/azure-blue.css",
               "src/styles.css",
               "public/plugins/fontawesome-free/css/all.min.css",
               "public/dist/css/adminlte.min.css",
               "public/plugins/bootstrap/css/bootstrap.min.css"
-
             ],
           
             "scripts": [

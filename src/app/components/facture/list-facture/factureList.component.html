@@ -1,0 +1,251 @@
+<section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>
+            Mes factures
+          </h1>
+        </div>
+        <div class="col-sm-6">
+          <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Mes factures</li>
+          </ol>
+        </div>
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+  
+  <!-- Main content -->
+  <section class="content">
+    <div class="container-fluid">
+      
+      
+      <div class="card card-primary card-outline">
+        
+        <div class="tab-content" >
+            <div class="tab-pane fade show active" id="custom-content-below-entree" role="tabpanel" aria-labelledby="custom-content-below-entree-tab">
+              <div class="card">
+                <div class="card-header">
+            
+                </div>
+                <!-- /.card-header -->
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                      <div class="card">
+                        <!-- /.card-header -->
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                  <th>ID</th>
+                                  <th>Date</th>
+                                  <th>Montant Total</th>
+                                  <th>Mode de Paiement</th>
+                                  <th>Statut de Paiement</th>
+                                  </tr>
+                            </thead>
+                            <tbody>
+                              
+                              
+                              @for (facture of factures; track facture.id){
+  
+                                  <tr (click)="selectFacture(facture)" data-toggle="modal" data-target="#modal-xl">
+                                      <td>{{ facture.id }}</td>
+                                      <td>{{ facture.date  }}</td>
+                                      <td>{{ facture.montantTotal  }}</td>
+                                      <td>{{ facture.paiementMode }}</td>
+                                      <td>{{ facture.paiementStatus }}</td>
+                                      
+                                    </tr>
+                                }
+                                
+                              
+                            </tbody>
+                        </table>
+                    </div>
+                      
+  
+                      <!-- /.card-body -->
+                    </div>
+
+                  
+
+        
+                  <!-- /.card -->
+                </div>
+            </div>
+              <!-- /.row -->
+                </div>
+                <!-- /.card-body -->
+                
+              </div>
+            </div>
+            
+            
+          </div>
+          
+        </div>
+      
+      <!-- /.card -->
+    </div>
+    <!-- /.container-fluid -->
+     @if(selectedFacture){
+
+        <div class="modal fade" id="modal-xl" >
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h4 class="modal-title">Extra Large Modal</h4>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                  <!--bodyyyy-->
+                  <div class="row">
+                    <div class="col-12">
+                      
+            
+            
+                      <!-- Main content -->
+                      <div class="invoice p-3 mb-3">
+                        <!-- title row -->
+                        <div class="row">
+                          <div class="col-12">
+                            <h4>
+                              <i class="fas fa-globe"></i> AdminLTE, Inc.
+                              <small class="float-right">Date: {{ facture.date }}</small>
+                            </h4>
+                          </div>
+                          <!-- /.col -->
+                        </div>
+                        <!-- info row -->
+                        <div class="row invoice-info">
+                          <div class="col-sm-4 invoice-col">
+                            De
+                            <address>
+                              <strong>{{ sender.name }}</strong><br>
+                              {{ sender.address }}<br>
+                              Téléphone: {{ sender.phone }}<br>
+                              Email: {{ sender.email }}
+                            </address>
+                          </div>
+                          <!-- /.col -->
+                          <div class="col-sm-4 invoice-col">
+                            À
+                            <address>
+                              <strong>{{ receiver.name }}</strong><br>
+                              {{ receiver.address }}<br>
+                              Téléphone: {{ receiver.phone }}<br>
+                              Email: {{ receiver.email }}
+                            </address>
+                          </div>
+                          <!-- /.col -->
+                          <div class="col-sm-4 invoice-col">
+                            <b>Facture #{{ facture.id }}</b><br>
+                            <br>
+                            <b>Mode de paiement:</b> {{ facture.paiementMode }}<br>
+                            <b>Statut du paiement:</b> {{ facture.paiementStatus ? 'Payé' : 'Non payé' }}
+                          </div>
+                          <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+            
+                        <!-- Table row -->
+                        <div class="row">
+                          <div class="col-12 table-responsive">
+                            <table class="table table-striped">
+                              <thead>
+                                <tr>
+                                  <th>Description</th>
+                                  <th>Produit</th>
+                                  <th>Quantité</th>
+                                  <th>Prix unitaire HT</th>
+                                  <th>Total HT</th>
+                                </tr>
+                              </thead>
+                              <tbody>
+                                <!-- Boucle sur les bons de livraison -->
+                                @for(bon of facture.bon; trackBy: trackById){
+                                  <tr >
+                                    <!-- Boucle sur les transactions de chaque bon -->
+                                     @for(transaction of bon.transactions; trackBy: trackById"){
+                                      <tr >
+                                        <td>{{ transaction.description }}</td>
+                                        <td>{{ transaction.product.name }}</td>
+                                        <td>{{ transaction.quantity }}</td>
+                                        <td>{{ transaction.unitPrice }}</td>
+                                        <td>{{ transaction.totalPrice }}</td>
+                                      </tr>
+                                     }
+                                    
+                                  </tr>
+                                }
+                                
+                              </tbody>
+                            </table>
+                          </div>
+                          <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+            
+                        <div class="row">
+                          <!-- accepted payments column -->
+                          
+                          <!-- /.col -->
+                          <div class="col-6">
+                            <p class="lead">Montant dû {{ facture.date.plusDays(15) }}</p>
+            
+                            <div class="table-responsive">
+                              <table class="table">
+                                <tr>
+                                  <th style="width:50%">Sous-total:</th>
+                                  <td>{{ facture.montantTotal }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Taxe (20%)</th>
+                                  <td>{{ facture.montantTotal.multiply(0.2) }}</td>
+                                </tr>
+                                <tr>
+                                  <th>Total:</th>
+                                  <td>{{ facture.montantTotal.multiply(1.2) }}</td>
+                                </tr>
+                              </table>
+                            </div>
+                          </div>
+                          <!-- /.col -->
+                        </div>
+                        <!-- /.row -->
+            
+                        <!-- this row will not appear when printing -->
+                        <div class="row no-print">
+                          <div class="col-12">
+                            <a href="invoice-print.html" rel="noopener" target="_blank" class="btn btn-default"><i class="fas fa-print"></i> Print</a>
+                            <button type="button" class="btn btn-success float-right"><i class="far fa-credit-card"></i> Soumettre le paiement
+                            </button>
+                            <button type="button" class="btn btn-primary float-right" style="margin-right: 5px;">
+                              <i class="fas fa-download"></i> Générer PDF
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                      <!-- /.invoice -->
+                    </div><!-- /.col -->
+                  </div><!-- /.row -->
+                </div>
+                <div class="modal-footer justify-content-between">
+                  <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+              </div>
+              <!-- /.modal-content -->
+            </div>
+            <!-- /.modal-dialog -->
+          </div>
+          <!-- /.modal -->
+     }
+    
+</section>
+<!-- /.content -->

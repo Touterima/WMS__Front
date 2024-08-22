@@ -11,6 +11,7 @@ import { faTrash, faEdit } from '@fortawesome/free-solid-svg-icons';
 import { Produits } from '../../models/product.models';
 import { ProductService } from '../../services/product-service.service';
 import { Transaction } from '../../models/transaction.models';
+import { BehaviorSubject } from 'rxjs';
 
 
 
@@ -51,11 +52,28 @@ export class TransfertStockComponent implements OnInit {
   
 
    targetEmail: string ='';
+   email: string = '';
+  user: any;
+
+
+  private userSubject = new BehaviorSubject<User | null>(null);
+  user$ = this.userSubject.asObservable();
+  
 
   constructor(private productService: ProductService, private transactionService: TransactionService,private bonService: BonService ,private userService: UserService, private toastr: ToastrService, private http: HttpClient,private dialog: MatDialog) {
 
    }
 
+   /*searchUser() {
+    this.userService.getUserByEmail(this.targetEmail).subscribe(
+      (data) => this.user = data,
+      (error) => console.error('Erreur:', error)
+    );
+  }*/
+
+   onSubmit(){
+    
+   }
 
 
   ngOnInit(): void {
@@ -184,28 +202,60 @@ deleteTransaction(id?: number): void {
       );
   }
 }
-onValidate() {
-  if (this.form.valid) {
-    const targetEmail= this.targetEmail
-    if (targetEmail != '') {
-      //const receiverEmail = targetEmailControl.value;
-      this.userService.getUserByEmail(targetEmail).subscribe(
-        (user) => {
-          if (user.role.some((role: any) => role.type === 'USER')) {
-            this.handleUserRole(user);
-          } else {
-            this.handleOtherRole(user);
-          }
-        },
-        (error) => {
-          this.toastr.error('Erreur lors de la récupération des informations de l\'utilisateur');
+
+/*searchUser() {
+  this.userService.getUserByEmail(this.targetEmail).subscribe(
+    (data) => this.user = data,
+    (error) => console.error('Erreur:', error)
+  );
+}*/
+searchUser() {
+  this.userService.getUserByEmail(this.targetEmail).subscribe(
+
+    (data) => {
+      this.user = data,
+      this.userSubject.next(data);
+      this.toastr.info('Utilisateur trouvé. Cliquez sur Valider pour continuer.');
+    }
+  );
+}
+
+/*onValidate() {
+  const targetEmail= this.targetEmail;
+  if (targetEmail !== '') {
+    //const receiverEmail = targetEmailControl.value;
+    this.userService.getUserByEmail(this.targetEmail).subscribe(
+      
+      (user) => {
+        if (user.role.some((role: any) => role.type === 'USER')) {
+          this.handleUserRole(user);
+          this.toastr.info(`Client trouvé avec l'adresse ${this.targetEmail}`);
+        } else {
+          this.handleOtherRole(user);
+          this.toastr.info('***22222222222***');
         }
-      );
+      },
+      (error) => {
+        this.toastr.error('Erreur lors de la récupération des informations de l\'utilisateur');
+      }
+    );
+  } else {
+    this.toastr.error('Champ email manquant');
+  }
+    
+}*/
+onValidate() {
+  const user = this.userSubject.getValue();
+  if (user) {
+    if (user.role.some((role: any) => role.type === 'USER')) {
+      this.handleUserRole(user);
+      this.toastr.info(`Client trouvé avec l'adresse ${this.targetEmail}`);
     } else {
-      this.toastr.error('Champ email manquant');
+      this.handleOtherRole(user);
+      this.toastr.info('***22222222222***');
     }
   } else {
-    this.toastr.error('Veuillez remplir correctement tous les champs');
+    this.toastr.error('Aucun utilisateur trouvé. Veuillez d\'abord rechercher un utilisateur.');
   }
 }
 /********************************************************************************** */
@@ -235,12 +285,31 @@ onValidate() {
 }
   */
 
-private handleUserRole(user: any) {
-  const dialogRef = this.dialog.open(FacturationDialogComponent);
+/*private handleUserRole(user: any) {
+  const dialogRef = this.dialog.open(FacturationDialogComponent,{width: '250px'});
 
   dialogRef.afterClosed().subscribe(result => {
-    if (result === 'oui' || result === 'non') {
-      this.createBonAndGenerateQRCode(user, result === 'oui');
+    if (result === 'oui') {
+      //this.createBonAndGenerateQRCode(user, result === 'oui');
+      this.toastr.error('ouiiiiiiiiii');
+
+    }
+    else {
+      //this.createBonAndGenerateQRCode(user, result === 'oui');
+      this.toastr.error('noooooooon');
+
+    }
+  });
+}*****************************/
+private handleUserRole(user: any) {
+  const dialogRef = this.dialog.open(FacturationDialogComponent, { width: '250px' });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result === 'oui') {
+      this.createBonAndGenerateQRCode(user, true);
+    } else {
+      this.createBonAndGenerateQRCode(user, false);
+      //this.toastr.error('noooooooon');
     }
   });
 }
@@ -250,13 +319,14 @@ private handleOtherRole(user: any) {
 }
 
 
-private createBonAndGenerateQRCode(user: any, isFacture: boolean) {
-  this.bonService.createBon(user.email, this.transactions).subscribe(
+private createBonAndGenerateQRCode(user: any, tofactur: boolean) {
+  const transactionIds = this.transactions.map(transaction => transaction.id);
+  this.bonService.createBonCommande(user.id, transactionIds).subscribe(
     (response) => {
-      this.bonService.generateQRCode(response.bonId).subscribe(
+      this.bonService.getBonQRCode(response.bonId).subscribe(
         (qrCodeBlob) => {
           this.displayQRCode(qrCodeBlob);
-          this.waitForQRCodeScan(response.bonId, isFacture);
+          this.waitForQRCodeScan(response.bonId, tofactur);
         },
         (error) => this.toastr.error('Erreur lors de la génération du QR code')
       );
@@ -281,105 +351,30 @@ private displayQRCode(qrCodeBlob: Blob) {
   reader.readAsDataURL(qrCodeBlob);
 }
 
-private waitForQRCodeScan(bonId: number, isFacture: boolean) {
-  const checkInterval = setInterval(() => {
-    this.bonService.checkBonStatus(bonId).subscribe(
-      (status) => {
-        if (status === 'SCANNED') {
-          clearInterval(checkInterval);
-          this.finalizeBon(bonId, isFacture);
-        }
-      },
-      (error) => {
-        clearInterval(checkInterval);
-        this.toastr.error('Erreur lors de la vérification du statut du bon');
-      }
-    );
-  }, 5000); // Vérifie toutes les 5 secondes
-}
-
-private finalizeBon(bonId: number, isFacture: boolean) {
-  this.bonService.finalizeBon(bonId, isFacture).subscribe(
-    () => {
-      this.toastr.success('Bon finalisé avec succès');
-      this.loadTransactions(); // Recharger les transactions après la finalisation
-    },
-    (error) => this.toastr.error('Erreur lors de la finalisation du bon')
-  );
-}
-}
-
-
-
-
-
-/*async onValidate() {
-  const targetEmail = this.form.controls['targetEmail'].value;
-  const receiverRole = await this.userService.getUserRole(this.receiverId);
-  
-  if (receiverRole === TypeRole.USER) {
-    const userChoice = await this.showFacturationPopup();
-    
-    if (userChoice === 'non') {
-      await this.generateAndHandleQRCode(false);
-    } else if (userChoice === 'oui') {
-      await this.generateAndHandleQRCode(true);
-    }
-  } else {
-    await this.createBonAndGenerateQRCode();
-  }
-}*/
-
-/*NoFacture(): void {
-  const targetEmail = this.form.get('targetEmail')?.value;
-  const transactionIds = this.form.get('transactionIds')?.value;
-
-  // Requête pour récupérer l'utilisateur par email
-  this.http.get<User>(`http://localhost:8080/admin/user-by-email/${targetEmail}`).subscribe(
-    (receiver) => {
-      const receiverId = receiver.id;
-
-      // Appel au backend pour créer le bon et générer le QR code sans facturer
-      this.http.post<Bon>(`http://localhost:8080/admin/create-bon?receiverId=${receiverId}`, transactionIds)
-        .subscribe(
-          (bon) => {
-            // Requête pour générer le QR code
-            this.http.get(`http://localhost:8080/admin/${bon.id}/qrcode`, { responseType: 'blob' })
-              .subscribe((response: Blob) => {
-                const url = window.URL.createObjectURL(response);
-                const a = document.createElement('a');
-                a.href = url;
-                a.download = `bon-${bon.id}.png`;
-                a.click();
-              });
-          },
-          (error) => {
-            console.error('Erreur lors de la création du bon', error);
+  private waitForQRCodeScan(bonId: number, tofactur: boolean) {
+    const checkInterval = setInterval(() => {
+      this.bonService.checkBonStatus(bonId).subscribe(
+        (status) => {
+          if (status === 'SCANNED') {
+            clearInterval(checkInterval);
+            this.finalizeBon(bonId, tofactur);
           }
-        );
-    },
-    (error) => {
-      console.error('Erreur lors de la récupération de l\'utilisateur', error);
-    }
-  );
-}*/
-/*onValidate() {
-  if (this.form.valid) {
-    const receiverEmail = this.form.get('targetEmail').value;
-    this.userService.getUserByEmail(receiverEmail).subscribe(
-      (user) => {
-        if (user.role.some(role => role.type === 'USER')) {
-          this.handleUserRole(user);
-        } else {
-          this.handleOtherRole(user);
+        },
+        (error) => {
+          clearInterval(checkInterval);
+          this.toastr.error('Erreur lors de la vérification du statut du bon');
         }
+      );
+    }, 5000); // Vérifie toutes les 5 secondes
+  }
+
+  private finalizeBon(bonId: number, tofactur: boolean) {
+    this.bonService.finalizeBon(bonId, tofactur).subscribe(
+      () => {
+        this.toastr.success('Bon finalisé avec succès');
+        this.loadTransactions(); // Recharger les transactions après la finalisation
       },
-      (error) => {
-        this.toastr.error('Erreur lors de la récupération des informations de l\'utilisateur');
-      }
+      (error) => this.toastr.error('Erreur lors de la finalisation du bon')
     );
-  } else {
-    this.toastr.error('Veuillez remplir correctement tous les champs');
   }
 }
-  */

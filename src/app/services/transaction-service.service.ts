@@ -44,4 +44,6 @@ export class TransactionService {
       const url = `${this.apiUrl}/associate-transactions-to-bon?bonId=${bonId}`;
       return this.http.post(url, transactionIds);
     }
+
+    
 }

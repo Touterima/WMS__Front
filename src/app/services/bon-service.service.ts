@@ -48,4 +48,18 @@ export class BonService {
   finalizeBon(bonId: number, isFacture: boolean): Observable<any> {
     return this.http.post(`${this.apiUrl}/${bonId}/finalize`, { isFacture });
   }
+
+
+
+  getBons(): Observable<Bon[]> {
+    return this.http.get<Bon[]>(`${this.apiUrl}/bon-list`);
+  }
+
+  createBonCommande( receiverId: number, transactionIds: number[]) {
+    return this.http.post<any>(`${this.apiUrl}/bonsCom`, { receiverId, transactionIds });
+  }
+  getBonQRCode(bonId: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/${bonId}/qrcode`, { responseType: 'blob' });
+  }
+  
 }
