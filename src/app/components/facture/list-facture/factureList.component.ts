@@ -3,12 +3,13 @@ import {Component, OnInit} from '@angular/core';
 import { RouterModule} from "@angular/router";
 import { Facture } from '../../../models/facture.models';
 import { FactureService } from '../../../services/facture-service.services';
+import { CommonModule } from '@angular/common';
 
 
 @Component({
     standalone: true,
   templateUrl: './factureList.component.html',
-  imports:[RouterModule]
+  imports:[RouterModule, CommonModule]
 })
 export class FactureListComponent implements OnInit {
     factures: Facture[] = [];

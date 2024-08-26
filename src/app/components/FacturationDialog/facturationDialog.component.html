@@ -1,14 +1,8 @@
-<div class="modal fade" >
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h2 mat-dialog-title>Facturer</h2>
-      <mat-dialog-content>Voulez-vous facturer ces transactions ?</mat-dialog-content>
-      <mat-dialog-actions>
-        <button mat-button [mat-dialog-close]="'non'">Non</button>
-        <button mat-button [mat-dialog-close]="'oui'">Oui</button>
-      </mat-dialog-actions>
-      </div>
-    </div>
-  </div>
+<div class="modal-dialog">
+  <h2 mat-dialog-title>Facturer?</h2>
+  <mat-dialog-content>Voulez-vous facturer ces transactions ?</mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-button (click)="onYesClick()" [mat-dialog-close]="'non'">Non</button>
+    <button mat-flat-button (click)="onNoClick()" [mat-dialog-close]="'oui'" >Oui</button>
+  </mat-dialog-actions>
 </div>

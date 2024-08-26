@@ -64,12 +64,7 @@ export class TransfertStockComponent implements OnInit {
 
    }
 
-   /*searchUser() {
-    this.userService.getUserByEmail(this.targetEmail).subscribe(
-      (data) => this.user = data,
-      (error) => console.error('Erreur:', error)
-    );
-  }*/
+  
 
    onSubmit(){
     
@@ -203,12 +198,7 @@ deleteTransaction(id?: number): void {
   }
 }
 
-/*searchUser() {
-  this.userService.getUserByEmail(this.targetEmail).subscribe(
-    (data) => this.user = data,
-    (error) => console.error('Erreur:', error)
-  );
-}*/
+
 searchUser() {
   this.userService.getUserByEmail(this.targetEmail).subscribe(
 
@@ -285,31 +275,19 @@ onValidate() {
 }
   */
 
-/*private handleUserRole(user: any) {
-  const dialogRef = this.dialog.open(FacturationDialogComponent,{width: '250px'});
 
-  dialogRef.afterClosed().subscribe(result => {
-    if (result === 'oui') {
-      //this.createBonAndGenerateQRCode(user, result === 'oui');
-      this.toastr.error('ouiiiiiiiiii');
-
-    }
-    else {
-      //this.createBonAndGenerateQRCode(user, result === 'oui');
-      this.toastr.error('noooooooon');
-
-    }
-  });
-}*****************************/
 private handleUserRole(user: any) {
   const dialogRef = this.dialog.open(FacturationDialogComponent, { width: '250px' });
 
   dialogRef.afterClosed().subscribe(result => {
     if (result === 'oui') {
       this.createBonAndGenerateQRCode(user, true);
+      console.log('Bon créé avec succès');
+      
+      this.toastr.error('ouiiiiiiiiii');
     } else {
       this.createBonAndGenerateQRCode(user, false);
-      //this.toastr.error('noooooooon');
+      console.log('Utilisateur a cliqué sur Non');
     }
   });
 }
@@ -328,7 +306,7 @@ private createBonAndGenerateQRCode(user: any, tofactur: boolean) {
           this.displayQRCode(qrCodeBlob);
           this.waitForQRCodeScan(response.bonId, tofactur);
         },
-        (error) => this.toastr.error('Erreur lors de la génération du QR code')
+      //  (error) => this.toastr.error('Erreur lors de la génération du QR code')
       );
     },
     (error) => this.toastr.error('Erreur lors de la création du bon')
