@@ -37,7 +37,9 @@ export class MesTransfertsComponent implements OnInit {
   bons: Bon[] = [];
   selectedBon: Bon | null = null;
 
-  constructor(private bonservice: BonService) { }
+  selectedBonId: number | undefined;  // Ajoutez cette ligne
+  selectedBonQRCode: string | undefined;
+  constructor(private bonservice: BonService, private dialog: MatDialog) { }
 
 
   ngOnInit(): void {
@@ -52,4 +54,37 @@ export class MesTransfertsComponent implements OnInit {
   selectBon(bon: Bon): void {
     this.selectedBon = bon;
   }
+/*
+  showQRCode(bonId: number) {
+    this.selectedBonId = bonId;
+    this.selectedBonQRCode = undefined; // Réinitialise le QR code précédent
+    
+    this.bonservice.getBonQRCode(bonId).subscribe(
+      (data: Blob) => {
+        const reader = new FileReader();
+        reader.onloadend = () => {
+          this.selectedBonQRCode = reader.result as string;
+        };
+        reader.readAsDataURL(data);
+      },
+      error => console.error('Erreur lors de la récupération du QR code', error)
+    );
+  }
+*/
+showQRCode(bonId: number) {
+  const dialogRef = this.dialog.open(QRCodeDialogComponent, {
+    data: { bonId: bonId, qrCodeUrl: '' }
+  });
+
+  this.bonservice.getBonQRCode(bonId).subscribe(
+    (data: Blob) => {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        dialogRef.componentInstance.data.qrCodeUrl = reader.result as string;
+      };
+      reader.readAsDataURL(data);
+    },
+    error => console.error('Erreur lors de la récupération du QR code', error)
+  );
+}
 }

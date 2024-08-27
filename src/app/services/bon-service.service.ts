@@ -58,8 +58,8 @@ export class BonService {
   createBonCommande( receiverId: number, transactionIds: number[]) {
     return this.http.post<any>(`${this.apiUrl}/bonsCom`, { receiverId, transactionIds });
   }
-  getBonQRCode(bonId: number): Observable<Blob> {
-    return this.http.get(`${this.apiUrl}/${bonId}/qrcode`, { responseType: 'blob' });
+  getBonQRCode(id: number): Observable<Blob> {
+    return this.http.get(`${this.apiUrl}/${id}/qrcode`, { responseType: 'blob' });
   }
   
 }

@@ -1,3 +1,4 @@
+<!--
 <h2 mat-dialog-title>Scannez le QR Code</h2>
       <mat-dialog-content>
         <img [src]="data.imgSrc" alt="QR Code">
@@ -5,3 +6,17 @@
       <mat-dialog-actions>
         <button mat-button [mat-dialog-close]>Fermer</button>
       </mat-dialog-actions>
+    -->
+    <h2 mat-dialog-title class="text-muted">QR Code pour Bon ID: {{data.bonId}}</h2>
+    <mat-dialog-content>
+      @if(data.qrCodeUrl){
+      <div >
+        <img [src]="data.qrCodeUrl" alt="QR Code">
+        <h3>Scan me!</h3>
+      </div>>
+      @if(!data.qrCodeUrl){
+        <p >Chargement du QR code...</p>
+      }
+    }
+    </mat-dialog-content>
+    

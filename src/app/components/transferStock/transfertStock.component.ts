@@ -304,9 +304,9 @@ private createBonAndGenerateQRCode(user: any, tofactur: boolean) {
       this.bonService.getBonQRCode(response.bonId).subscribe(
         (qrCodeBlob) => {
           this.displayQRCode(qrCodeBlob);
-          this.waitForQRCodeScan(response.bonId, tofactur);
+          //this.waitForQRCodeScan(response.bonId, tofactur);
         },
-      //  (error) => this.toastr.error('Erreur lors de la génération du QR code')
+       (error) => this.toastr.error('Erreur lors de la génération du QR code')
       );
     },
     (error) => this.toastr.error('Erreur lors de la création du bon')

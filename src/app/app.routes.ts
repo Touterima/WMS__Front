@@ -14,6 +14,7 @@ import { FactureComponent } from './components/facture/facture.component';
 import { TransfertStockComponent } from './components/transferStock/transfertStock.component';
 import { MesTransfertsComponent } from './components/mesTransferts/mrsTransferts.component';
 import { FactureListComponent } from './components/facture/list-facture/factureList.component';
+import { InventaireAgentComponent } from './components/inventaire/inventaireAgent.component';
 
 export const routes: Routes = [
     { path:'', component: LoginComponent},
@@ -32,7 +33,9 @@ export const routes: Routes = [
             { path:'passer-transaction', component: PasserTransactionsComponent},
             { path:'factures', component: FactureListComponent},
             { path:'transertStock', component: TransfertStockComponent},
-            { path:'mesTransfert' , component: MesTransfertsComponent}
+            { path:'mesTransfert' , component: MesTransfertsComponent},
+            { path:'inventaire' , component: InventaireAgentComponent}
+            
        
 
         ]

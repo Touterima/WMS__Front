@@ -30,7 +30,8 @@ export class FacturationDialogComponent implements OnInit {
   }
 
   onNoClick(): void {
-    this.dialogRef.close('non'); // Close dialog and return 'non' as result
+    this.dialogRef.close('non');
+    console.log // Close dialog and return 'non' as result
   }
 }
 

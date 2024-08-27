@@ -7,5 +7,7 @@ import { MAT_DIALOG_DATA, MatDialogModule } from '@angular/material/dialog';
     imports:[MatDialogModule]
   })
   export class QRCodeDialogComponent {
-    constructor(@Inject(MAT_DIALOG_DATA) public data: { imgSrc: string }) {}
+   // constructor(@Inject(MAT_DIALOG_DATA) public data: { imgSrc: string }) {}
+    constructor(@Inject(MAT_DIALOG_DATA) public data: {bonId: number, qrCodeUrl: string}) {}
+
   }
