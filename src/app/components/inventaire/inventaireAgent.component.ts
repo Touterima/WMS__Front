@@ -33,4 +33,15 @@ export class InventaireAgentComponent implements OnInit {
       }
     });
   }
+  /* stock: Stock | null = null;
+
+      constructor(private stockService: StockService) {}
+    
+      ngOnInit() {
+        this.stockService.getCurrentUserStock().subscribe(stock => {
+          this.stock = stock;
+        });
+      }
+        */
+  
 }

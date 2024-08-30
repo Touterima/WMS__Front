@@ -1,5 +1,45 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatDividerModule } from '@angular/material/divider';
+import { RouterLink, RouterModule, RouterOutlet } from '@angular/router';
+ 
+@Component({
+  standalone: true,
+  template: `<div class="modal-dialog">
+  <h2 mat-dialog-title>Facturer?</h2>
+  <mat-dialog-content>{{ message }}</mat-dialog-content>
+  <mat-dialog-actions>
+  <button type="button" (click)="onNoClick()" [mat-dialog-close]="'non'">Non</button>
+  <button type="button" (click)="onYesClick()" [mat-dialog-close]="'oui'">Oui</button>
+  </mat-dialog-actions>
+</div>`,
+  imports: [MatDialogModule, RouterModule, MatButtonModule, MatDividerModule]
+})
+export class FacturationDialogComponent implements OnInit {
+  constructor(
+    public dialogRef: MatDialogRef<FacturationDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public message: string
+  ) { }
+ 
+  ngOnInit() {
+    if (!this.message) {
+      this.message = 'Voulez-vous facturer ces transactions ?';
+    }
+  }
+ 
+  onYesClick(): void {
+    this.dialogRef.close('oui');
+    console.log('Oui clicked');
+  }
+ 
+  onNoClick(): void {
+    this.dialogRef.close('non');
+    console.log('No clicked'); // Fixed console.log
+  }
+}
+/*import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
 import {MatButtonModule} from '@angular/material/button';
 import {MatDividerModule} from '@angular/material/divider';
 

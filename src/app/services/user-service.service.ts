@@ -35,4 +35,8 @@ export class UserService {
   getUserByEmail(email: string): Observable<any> {
     return this.http.get(`${this.baseUrl}/search?email=${email}`);
   }
+
+  getUserCount() {
+    return this.http.get<number>(`${this.baseUrl}/users/count`);
+  }
 }

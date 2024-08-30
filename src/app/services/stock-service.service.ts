@@ -12,6 +12,18 @@ export class StockService {
   constructor(private http: HttpClient) { }
 
   getCurrentUserStock(): Observable<Stock> {
-    return this.http.get<Stock>(`${this.apiUrl}/currentStock`);
+    return this.http.get<Stock>(`${this.apiUrl}/current-stock`);
   }
+
+  getStockCount() {
+    return this.http.get<number>(`${this.apiUrl}/stocks/count`);
+  }
+
+  getAllStocks(): Observable<Stock[]> {
+    return this.http.get<Stock[]>(`${this.apiUrl}/stocks`);
+}
+
+getStockById(id: number): Observable<Stock> {
+    return this.http.get<Stock>(`${this.apiUrl}/stock/${id}`);
+}
 }

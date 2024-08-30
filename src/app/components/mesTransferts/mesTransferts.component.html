@@ -60,11 +60,13 @@
                         <td>{{ bon.id }}</td>
                         <td>{{ bon.receiver.email }}</td>
                         @if(bon.status){
+                          <td>
                           <button class="btn btn-block btn-outline-success" (click)="showQRCode(bon.id)">QR Code scané</button>
-                          
+                          </td>
                         }@else{
+                          <td>
                           <button class="btn btn-block btn-success" (click)="showQRCode(bon.id)">Scaner QR Code</button>
-                          
+                          </td>
                         }
                         
                       </tr>

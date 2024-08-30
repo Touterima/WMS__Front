@@ -1,8 +1,17 @@
-<div class="modal-dialog">
+<!--<div class="modal-dialog">
   <h2 mat-dialog-title>Facturer?</h2>
   <mat-dialog-content>Voulez-vous facturer ces transactions ?</mat-dialog-content>
   <mat-dialog-actions>
     <button  (click)="onYesClick()" [mat-dialog-close]="'non'">Non</button>
     <button  (click)="onNoClick()" [mat-dialog-close]="'oui'" >Oui</button>
+  </mat-dialog-actions>
+</div>
+-->
+<div class="modal-dialog">
+  <h2 mat-dialog-title>Facturer?</h2>
+  <mat-dialog-content>{{ message }}</mat-dialog-content>
+  <mat-dialog-actions>
+  <button (click)="onNoClick()" [mat-dialog-close]="'non'">Non</button>
+  <button (click)="onYesClick()" [mat-dialog-close]="'oui'">Oui</button>
   </mat-dialog-actions>
 </div>

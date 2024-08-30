@@ -237,7 +237,7 @@ searchUser() {
 onValidate() {
   const user = this.userSubject.getValue();
   if (user) {
-    if (user.role.some((role: any) => role.type === 'USER')) {
+    if (user.role.some((role: any) => role.type === 'USER')) { 
       this.handleUserRole(user);
       this.toastr.info(`Client trouvé avec l'adresse ${this.targetEmail}`);
     } else {
@@ -328,7 +328,7 @@ private displayQRCode(qrCodeBlob: Blob) {
   };
   reader.readAsDataURL(qrCodeBlob);
 }
-
+/*
   private waitForQRCodeScan(bonId: number, tofactur: boolean) {
     const checkInterval = setInterval(() => {
       this.bonService.checkBonStatus(bonId).subscribe(
@@ -354,5 +354,5 @@ private displayQRCode(qrCodeBlob: Blob) {
       },
       (error) => this.toastr.error('Erreur lors de la finalisation du bon')
     );
-  }
+  }*/
 }

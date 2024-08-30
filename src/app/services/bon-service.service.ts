@@ -61,5 +61,19 @@ export class BonService {
   getBonQRCode(id: number): Observable<Blob> {
     return this.http.get(`${this.apiUrl}/${id}/qrcode`, { responseType: 'blob' });
   }
-  
+
+  getLivraisonBonCount() {
+    return this.http.get<number>(`${this.apiUrl}/bons/livraison/count`);
+  }
+/*
+  getBonStatistics(): Observable<BonStatistics> {
+    return this.http.get<BonStatistics>('/api/bons/statistics');
+  }
+  */
+  getBonsDeLivraisonEnvoyeeParCurrentUser(): Observable<Bon[]> {
+    return this.http.get<Bon[]>(`${this.apiUrl}/mes-bons-livraison`);
+  }
+  getBonsDeCommandeEnvoyeeParCurrentUser(): Observable<Bon[]> {
+    return this.http.get<Bon[]>(`${this.apiUrl}/mes-bons-commande`);
+  }
 }

@@ -38,4 +38,9 @@ export class ProductService {
   updateProductStock(productId: number, newQuantity: number): Observable<Produits> {
     return this.http.patch<Produits>(`${this.baseUrl}/produits/${productId}/stock`, { qte: newQuantity });
   }
+
+  getProduitsCount() {
+    return this.http.get<number>(`${this.baseUrl}/produits/count`);
+  }
+  
 }
