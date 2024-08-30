@@ -39,11 +39,11 @@
                             </tr>
                           </thead>
                           <tbody>
-                              @for(product of stock.products; track product.id) {
+                              @for(stockItem of stock.stockItems; track stockItem.id) {
                                   <tr>
-                                      <td>{{ product.refArt }}</td>
-                                      <td>{{ product.prixVente}}</td>
-                                      <td>{{ product.qte }}</td>
+                                      <td>{{ stockItem.produit.refArt }}</td>
+                                      <td>{{ stockItem.produit.prixVente}}</td>
+                                      <td>{{ stockItem.quantity }}</td>
                                       <td>**</td>
                                     </tr>
                               }

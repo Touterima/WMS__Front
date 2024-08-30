@@ -17,6 +17,7 @@ import { FactureListComponent } from './components/facture/list-facture/factureL
 import { InventaireAgentComponent } from './components/inventaire/inventaireAgent.component';
 import { LivraisonComponent } from './components/livraisons/livraison.component';
 import { CommandeComponent } from './components/commandes/commandes.component';
+import { InventaireAdminComponent } from './components/inventaire/inventaireAdmin/inventaireAdmin.component';
 
 export const routes: Routes = [
     { path:'', component: LoginComponent},
@@ -37,11 +38,9 @@ export const routes: Routes = [
             { path:'transertStock', component: TransfertStockComponent},
             { path:'mesTransfert' , component: MesTransfertsComponent},
             { path:'inventaire' , component: InventaireAgentComponent},
+            { path:'inventaireAdmin' , component: InventaireAdminComponent},
             { path:'livraisons' , component: LivraisonComponent},
             { path:'commandes' , component: CommandeComponent}
-
-
-            
             
 
         ]

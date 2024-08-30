@@ -86,7 +86,7 @@
                           <td>
                             <span *ngIf="user.role[0]?.type === 'ADMIN'" class="badge badge-primary custom-badge">Admin</span>
                             <span *ngIf="user.role[0]?.type === 'USER'" class="badge badge-secondary custom-badge">User</span>
-                            <span *ngIf="user.role[0]?.type !== 'ADMIN' && user.role[0]?.type !== 'USER'" class="badge badge-secondary custom-badge" style="background-color: #FFC107">Investor</span>
+                            <span *ngIf="user.role[0]?.type === 'AGENT'" class="badge badge-secondary custom-badge" style="background-color: #FFC107">Agent</span>
                           </td>
                           <td>{{ user.status }}</td>
                           <td class="project-actions text-right" style="white-space: nowrap;">

@@ -23,7 +23,7 @@ export class StockService {
     return this.http.get<Stock[]>(`${this.apiUrl}/stocks`);
 }
 
-getStockById(id: number): Observable<Stock> {
-    return this.http.get<Stock>(`${this.apiUrl}/stock/${id}`);
-}
+  getStockById(id: number): Observable<Stock> {
+      return this.http.get<Stock>(`${this.apiUrl}/stock/${id}`);
+  }
 }

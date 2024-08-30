@@ -14,7 +14,7 @@ export class InventaireAgentComponent implements OnInit {
     stock: Stock = {
         name: '',
         details: '',
-        products: []
+        stockItems: []
       };
 
   constructor(private stockService: StockService) { }
