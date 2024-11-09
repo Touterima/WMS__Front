@@ -3,7 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient} from '@angular/common/http';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { FormControl, FormGroup, FormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 //import { fa-trash-can } from '@fortawesome/free-solid-svg-icons';
 //import { faTrash } from '@fortawesome/free-solid-svg-icons'import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
@@ -12,6 +12,8 @@ import { Produits } from '../../models/product.models';
 import { ProductService } from '../../services/product-service.service';
 import { Transaction } from '../../models/transaction.models';
 import { BehaviorSubject } from 'rxjs';
+
+
 
 
 
@@ -25,17 +27,20 @@ import { BonService } from '../../services/bon-service.service';
 import { QRCodeDialogComponent } from '../qrcodeDialog/qrcodeDialog.component';
 import { FacturationDialogComponent } from '../FacturationDialog/facturationDialog.component';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { MatSelectChange, MatSelectModule } from '@angular/material/select';
 
 
 
 @Component({
   standalone: true,
   templateUrl: './transfertStock.component.html',
-  imports:[CommonModule, RouterModule, FormsModule,FixedDecimalPipe, FontAwesomeModule, MatDialogModule] 
+  imports:[CommonModule, RouterModule, ReactiveFormsModule, FormsModule,FixedDecimalPipe, FontAwesomeModule, MatDialogModule, MatSelectModule] 
 })
 export class TransfertStockComponent implements OnInit {
 
   icon = faTrash;
+
+  selectedUser: User|null = null; // Selected user object
 
   transactions: Transaction[] = [];
   produits: Produits[] = [];
@@ -54,6 +59,7 @@ export class TransfertStockComponent implements OnInit {
    targetEmail: string ='';
    email: string = '';
   user: any;
+  users: User[]=[];
 
 
   private userSubject = new BehaviorSubject<User | null>(null);
@@ -61,14 +67,9 @@ export class TransfertStockComponent implements OnInit {
   
 
   constructor(private productService: ProductService, private transactionService: TransactionService,private bonService: BonService ,private userService: UserService, private toastr: ToastrService, private http: HttpClient,private dialog: MatDialog) {
-
    }
+   targetUserControl = new FormControl('', [Validators.required, Validators.email]);
 
-  
-
-   onSubmit(){
-    
-   }
 
 
   ngOnInit(): void {
@@ -77,6 +78,7 @@ export class TransfertStockComponent implements OnInit {
     this.form = new FormGroup({
       targetEmail: new FormControl('', [Validators.required, Validators.email]),
     });
+    this.getUsers();
 
   }
 
@@ -104,6 +106,23 @@ export class TransfertStockComponent implements OnInit {
     });
   }
 
+  getUsers() {
+    this.userService.getAllUsers() // Assuming your service method to get all users
+      .subscribe(
+        (data) => {
+          this.users = data;
+        },
+        (error) => {
+          this.errorMessage = 'Une erreur est survenue. Veuillez réessayer.';
+          console.error('Error fetching users:', error);
+        }
+      );
+  }
+  onSelectUser(event: MatSelectChange) {
+    this.selectedUser = event.value as User; // Caster la valeur vers le type User pour plus de sécurité
+    console.log('Utilisateur sélectionné:', this.selectedUser); // Pour déboguer
+  }
+  
   onSearch(): void {
     if (!this.searchTerm) {
       this.filteredProduits = this.produits;

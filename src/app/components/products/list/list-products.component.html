@@ -3,12 +3,12 @@
   <div class="container-fluid">
     <div class="row mb-2">
       <div class="col-sm-6">
-        <h3>Product List</h3>
+        <h5>Produits</h5>
       </div>
       <div class="col-sm-6">
         <ol class="breadcrumb float-sm-right">
           <li class="breadcrumb-item"><a href="#">Home</a></li>
-          <li class="breadcrumb-item active">Product List</li>
+          <li class="breadcrumb-item active">Produits</li>
         </ol>
       </div>
     </div>
@@ -46,7 +46,7 @@
           <div class="card-body table-responsive p-0">
             <table class="table table-hover text-nowrap">
               <thead>
-                <tr>
+                <tr class="text-primary">
                   
                   <th>ID</th>
                   <th>Réf. Art</th>
@@ -69,7 +69,7 @@
                 
                 <tr>
                   
-                  <td>{{ produit.id }}</td>
+                  <td class="text-primary">{{ produit.id }}</td>
                   <td>{{ produit.refArt }}</td>
                   <td>{{ produit.designation }}</td>
                   <td>{{ produit.collection }}</td>
@@ -85,16 +85,15 @@
                   
                   <td class="project-actions text-right">
                 
-                    <a class="btn btn-info btn-sm" [routerLink]="['/admin/editProduct', produit.id]">
-                        <i class="fas fa-pencil-alt">
-                        </i>
-                        Edit
-                    </a>
-                    <a class="btn btn-danger btn-sm" (click)="deleteProduit(produit.id)">
-                        <i class="fas fa-trash">
-                        </i>
-                        Delete
-                    </a>
+                    <a [routerLink]="['/admin/editProduct', produit.id]" class="btn btn-sm btn-warning mr-1"><i class="fas fa-edit"></i> Edit</a>
+                    <a (click)="deleteProduit(produit.id)" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
+                    <!--
+                    <td class="project-actions text-right" style="white-space: nowrap;">
+                            <a  class="btn btn-sm btn-primary mr-1"><i class="fas fa-eye"></i> View</a>
+                            <a href="#" class="btn btn-sm btn-warning mr-1"><i class="fas fa-edit"></i> Edit</a>
+                            <a (click)="deleteUser(user.id)" class="btn btn-sm btn-danger"><i class="fas fa-trash-alt"></i> Delete</a>
+                          </td>
+                    -->
                   </td>
                 <!-- <td>
                     <button

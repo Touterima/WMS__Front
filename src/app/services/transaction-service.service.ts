@@ -26,7 +26,7 @@ export class TransactionService {
 
 
   deleteTransaction(id: number): Observable<void> {
-    return this.http.delete<void>(`${this.apiUrl}/${id}`);
+    return this.http.delete<void>(`${this.apiUrl}/delete-transaction/${id}`);
   }
 
   getAllTransactionsByUser(): Observable<Transaction[]> {

@@ -16,3 +16,15 @@ export interface User {
     role: any;
     status: any;
   }
+/*
+  export enum UStatus {
+    Blocked,
+    Pending,
+    Active
+  }
+  export enum Role {
+    USER,
+    AGENT,
+    ADMIN
+  }
+    */

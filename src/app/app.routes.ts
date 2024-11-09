@@ -18,21 +18,22 @@ import { InventaireAgentComponent } from './components/inventaire/inventaireAgen
 import { LivraisonComponent } from './components/livraisons/livraison.component';
 import { CommandeComponent } from './components/commandes/commandes.component';
 import { InventaireAdminComponent } from './components/inventaire/inventaireAdmin/inventaireAdmin.component';
+import { AuthGuard } from './auth.guard';
 
 export const routes: Routes = [
     { path:'', component: LoginComponent},
     { path:'login', component: LoginComponent},
     { path:'register', component: RegisterComponent},
-    { path:'admin', component: AdminComponent,
+    { path:'admin', component: AdminComponent, canActivate: [AuthGuard],
         children:[
             { path:'', component: DashboardComponent},
-            { path:'dashboard', component: DashboardComponent},
+            { path:'dashboard', component: DashboardComponent, canActivate: [AuthGuard]},
             { path:'add-product', component: AddProductComponent},
             { path:'product-list', component: ProductListComponent},
             { path:'editProduct/:id', component: EditComponent},
             { path:'add-transaction', component: SearchProductComponent},
             { path:'transaction-list', component: TransactionListComponent},
-            { path:'users', component: UserListComponent},
+            { path:'users', component: UserListComponent},//{ path:'users', component: UserListComponent, canActivate: [AuthGuard]},
             { path:'passer-transaction', component: PasserTransactionsComponent},
             { path:'factures', component: FactureListComponent},
             { path:'transertStock', component: TransfertStockComponent},

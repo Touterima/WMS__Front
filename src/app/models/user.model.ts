@@ -1,6 +1,5 @@
 export class User{
     id!: number;
-    
     email!: string;
     password!: string;
     code!: string;
@@ -14,7 +13,7 @@ export class User{
     ville!: string;
     classeCompt!: string;
     devise!: string;
-    roles?: Role[];
+    roles?: Role;
     status?: UStatus;
 }
 export enum UStatus {

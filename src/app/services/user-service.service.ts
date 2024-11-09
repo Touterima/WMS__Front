@@ -39,4 +39,7 @@ export class UserService {
   getUserCount() {
     return this.http.get<number>(`${this.baseUrl}/users/count`);
   }
+  getProfile() {
+    return this.http.get(this.baseUrl + `current`);
+  }
 }
