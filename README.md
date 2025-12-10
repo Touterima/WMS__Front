@@ -2,26 +2,84 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.0.1.
 
-## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+# WMS - Warehouse Management System
 
-## Code scaffolding
+This WMS (Warehouse Management System) is a web-based platform designed to streamline warehouse operations by managing transactions, stock movements, invoices, and products.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
 
-## Build
+- **User Accounts**: Create an account, log in, and manage your profile.
+- **Transaction Management**: Handles all voucher types (types de Bon) including entries, exits, deliveries, and transfers..
+- **Real-Time Stock Management**: Updates and monitors stock movements per user and warehouse instantly.
+- **Billing & Invoicing**: Generates consolidated invoices.
+- **products management**: Enables admins to manage all products.
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+## Technologies Used
 
-## Running unit tests
+- **Frontend**: Angular 18, CSS
+- **Backend**: Spring Boot
+- **Database**: MySQL
+- **Additional Libraries**: angular material, chart.js,JWT Authentication 
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+## Installation
 
-## Running end-to-end tests
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Touterima/WMS__Front.git
+   cd WMSFront
+   ```
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+2. Install dependencies for both the client and server:
+   ```bash
+   npm install
+   ```
+   
+3. Run the development server:
+   
+   ```bash
+   ng serve
+   ```
+   Then navigate to:
 
-## Further help
+   ```bash
+   http://localhost:4200/
+   ```
+   
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+
+## Screenshots:
+
+   -  **Log In Page** :
+   ![login_page](./public/login-wms.png)
+
+   -  **Sign Up Page** :
+   ![signup_page](./public/register-wms.png)
+   
+   -  **Create transaction** :
+   ![Create_transaction](./public/CaptureTransfertStock.png)
+
+   ![Create_transaction1](./public/CaptureCreerTransaction.png)
+
+   ![Factur_transaction](./public/CaptureFacturer.png)
+
+   -  **Scan the Purchase voucher to accept the transaction** :
+   ![Bon_list](./public/Capture Bons.png)
+
+   ![Bon_scan_to_accept](./public/CaptureCodeQR.png) 
+
+   -  **user's transactions management** :
+   ![transactions management](./public/CaptureLivraison.png)
+
+   -  **Admin Products management** :
+   ![Products management](./public/Capture d’écran produits.png)
+
+   -  **Admin users management** :
+   ![users_management](./public/Capture d’écran users.png)
+
+   -  **Admin Warehouses inventory management** :
+   ![inventory management](./public/CaptureInventaireAdmin.png)
+
+## Licence
+
+This project is licensed under the MIT License.
