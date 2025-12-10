@@ -18,7 +18,7 @@ This WMS (Warehouse Management System) is a web-based platform designed to strea
 ## Technologies Used
 
 - **Frontend**: Angular 18, CSS
-- **Backend**: Spring Boot
+- **Backend**: Spring Boot [https://github.com/Touterima/WMS__Front.git](https://github.com/ZeroSTF/WMS.git)
 - **Database**: MySQL
 - **Additional Libraries**: angular material, chart.js,JWT Authentication 
 
@@ -29,13 +29,18 @@ This WMS (Warehouse Management System) is a web-based platform designed to strea
    git clone https://github.com/Touterima/WMS__Front.git
    cd WMSFront
    ```
+   Clone backend repository
+   ```bash
+   git clone https://github.com/Touterima/WMS__Front.git
+   cd WMS
+   ```
 
-2. Install dependencies for both the client and server:
+3. Install dependencies for both the client and server:
    ```bash
    npm install
    ```
    
-3. Run the development server:
+4. Run the development server:
    
    ```bash
    ng serve
