@@ -72,10 +72,10 @@ This WMS (Warehouse Management System) is a web-based platform designed to strea
    ![transactions management](./public/CaptureLivraison.png)
 
    -  **Admin Products management** :
-   ![Products management](./public/Capture d’écran produits.png)
+   ![Products_management](./public/Capturedécranproduits.png)
 
    -  **Admin users management** :
-   ![users_management](./public/Capture d’écran users.png)
+   ![users_management](./public/Capturedécranusers.png)
 
    -  **Admin Warehouses inventory management** :
    ![inventory management](./public/CaptureInventaireAdmin.png)
